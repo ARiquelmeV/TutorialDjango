@@ -1,0 +1,41 @@
+{% extends "MasterPage.html" %}
+
+{% block content %}
+
+<h2>Listado de Cursos</h2>
+<div class="table-responsive container">
+    <table class="table table-striped ">
+        <thead>
+            <tr>
+                <th class="centrado">#</th>
+                <th class="centrado">Curso</th>
+                <th class="centrado">Cr&eacute;ditos</th>
+                {#Aqui se crea "Opciones" y que tenga 2 columnas para posteriormente editar los cursos#}
+                <th class="centrado" colspan="2">Opciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for c in object_list %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{c.nombre}}</td>
+                <td class="centrado">{{c.creditos}}</td>
+                {#Lo siguente es valido para CRUD mediante el ORM#}
+                {#href hace un enlace al edicion/eliminacion, con el nombre de editar#}
+                {#El CRUD se hace sobre el id del curso (por el objeto c#}
+                <td><a href="edicionCurso/{{c.id}}" class="btn btn-sm btn-block btn-info text-white"><i class="fa-solid fa-pencil"></i> Editar</a></td>
+                <td><a href="eliminacionCurso/{{c.id}}"class="btn btn-sm btn-block btn-danger btnEliminacion"><i class="fa-solid fa-trash"></i> Eliminar</a></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>Profesor: {{c.docente}}</td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

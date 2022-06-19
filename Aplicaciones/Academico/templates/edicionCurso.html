@@ -1,0 +1,89 @@
+{% extends "MasterPage.html" %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="col-md-4">
+            <h2>Edición de Curso</h2>
+            <div class="card">
+                <div class="card-body">
+                    <form id="formularioCurso" action="/editarCurso/" method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="id" value="{{curso.id}}">
+                        <div class="form-group">
+                            <input type="text" id="txtNombre" name="txtNombre" value="{{curso.nombre}}" class="form-control" minlength="3" maxlength="30" placeholder="Nombre" autofocus required />
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <input type="number" id="numCreditos" name="numCreditos" class="form-control" min="1" max="10" step="1" value="1" required />
+                        </div>
+                        <br>
+                        <select type="number" id="numDocente" name="numDocente" class="form-control" autofocus required>
+                            <option>{{curso.docente}}</option>
+                            {% for d in docente %}
+                            {% if curso.docente.id != d.id %}
+                            <option label="{{d}}">{{d.id}}</option>
+                            {% endif %}
+                            {% endfor %}
+                        </select>
+                        <br>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-success btn-block text-white"><i class="far fa-save"></i> Guardar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <br>
+            <br>
+            <h2>Gestion de Docentes</h2>
+            <div class="card">
+                <div class="card-body">
+                {# action redirige #}
+                <form id="formularioDocente" action="/editarDocente/" method="POST"> 
+                    {% csrf_token %}
+                    <input type="hidden" name="idocente" value="{{curso.docente.id}}">
+                    {# Primera linea, input, tipo de texto, tipo de variable para views, tipo de variable javascript tipo de clase y placeholder #}
+                    {# Segunda linea, para validacion de campos #}
+                    <div class="form-group">
+                        <input type="text" id="txtNombres" name="txtNombres" value="{{curso.docente.nombres}}" class="form-control" placeholder="Nombres"
+                            minlenght = "3" maxlength="30" autofocus required/>
+                        </div>
+                    <br>
+                    <div class="form-group">
+                        <input type="text" id="txtAPPA" name="txtAPPA" value="{{curso.docente.apellido_paterno}}" class="form-control" placeholder="Apellido Paterno"
+                            minlenght = "3" maxlength="30" autofocus required/>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <input type="text" id="txtAPMA" name="txtAPMA" value="{{curso.docente.apellido_materno}}"  class="form-control" placeholder="Apellido Materno"
+                            minlenght = "3" maxlength="30" autofocus required/>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <h6>Fecha de nacimiento: {{curso.docente.fecha_nacimiento}}</h5>
+                        <input type="date" id="txtFECH" name="txtFECH" class="form-control" min="1920-01-01" max="2004-01-01" required/>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <!-- 
+                        <input type="text" id="txtGEN" name="txtGEN"  class="form-control" placeholder="Genero" pattern="[M|F|O]"
+                            minlenght = "1" maxlength="1" title="Genero solo puede ser M (para Masculino), F (para Femenino) y O (para otro)" autofocus required/>
+                        -->
+                        <select type="text" id="txtGEN" name="txtGEN" class="form-control" autofocus required>
+                            <option>{{curso.docente.genero}}</option>
+                            {% for d in docente %}
+                            {% if curso.docente.genero != d.genero %}
+                            <option>{{d.genero}}</option>
+                            {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-block btn-success text-white"><i class="fa-solid fa-floppy-disk"></i> Guardar</button>
+                    </div>
+                </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
