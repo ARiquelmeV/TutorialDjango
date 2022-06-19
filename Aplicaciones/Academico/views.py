@@ -5,7 +5,7 @@ from .models import Curso, Docente
 from django.views.generic import ListView
 
 
-# Create your views her
+# Create your views here.
 """
 def home(request):
     #cursosListados = Curso.objects.all().order_by('-nombre')|('nombre')|('creditos', 'nombre')
@@ -65,7 +65,7 @@ def eliminar_curso(request,id):
     curso=Curso.objects.get(id=id)
     curso.delete()
     # REDIRECT REDIRECCIONA HACIA LA RUTA RAIZ
-    return redirect('/ListadoCursos')
+    return redirect('/')
 
 def registrar_curso(request):
     # AQUI VAMOS A OBTENER LOS DATOS QUE SE INGRESEN EN LA PAGINA CON EL METODO POST

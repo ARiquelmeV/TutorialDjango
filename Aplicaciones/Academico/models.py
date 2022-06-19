@@ -31,7 +31,7 @@ class Docente(models.Model):
         ordering= ['apellido_paterno','-apellido_materno']        
 
 class Curso(models.Model):
-    nombre = models.CharField(max_length=45)
+    nombre = models.CharField(max_length=30)
     creditos = models.PositiveSmallIntegerField()
     # MODIFICACION DE LA CLASE CURSO, LA RELACION ES HACIA EL MODELO DOCENTE, YA QUE UN CURSO DEPENDE DE UN DOCENTE
     docente = models.ForeignKey(Docente, null=True, blank=True, on_delete=models.CASCADE)
