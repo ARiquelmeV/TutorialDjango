@@ -26,7 +26,11 @@ def home(request):
 # Inicio
 def inicio(request):
     # REDIRECT REDIRECCIONA HACIA LA RUTA RAIZ
-    return render(request, "inicio.html")
+    data = {
+        'titulo':'Inicio',
+    }
+    return render(request, "inicio.html", data)
+
 
 # VISTA DONDE SE AÑADEN CURSOS Y/O DOCENTES
 class CrearCurso(ListView):
@@ -65,7 +69,7 @@ def eliminar_curso(request,id):
     curso=Curso.objects.get(id=id)
     curso.delete()
     # REDIRECT REDIRECCIONA HACIA LA RUTA RAIZ
-    return redirect('/')
+    return redirect('/ListadoCursos')
 
 def registrar_curso(request):
     # AQUI VAMOS A OBTENER LOS DATOS QUE SE INGRESEN EN LA PAGINA CON EL METODO POST

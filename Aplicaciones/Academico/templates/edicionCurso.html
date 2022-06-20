@@ -14,11 +14,11 @@
                         </div>
                         <br>
                         <div class="form-group">
-                            <input type="number" id="numCreditos" name="numCreditos" class="form-control" min="1" max="10" step="1" value="1" required />
+                            <input type="number" id="numCreditos" name="numCreditos" value="{{curso.creditos}}" class="form-control" min="1" max="15" step="1" required />
                         </div>
                         <br>
                         <select type="number" id="numDocente" name="numDocente" class="form-control" autofocus required>
-                            <option>{{curso.docente}}</option>
+                            <option label="{{curso.docente}}">{{curso.docente.id}}</option>
                             {% for d in docente %}
                             {% if curso.docente.id != d.id %}
                             <option label="{{d}}">{{d.id}}</option>
@@ -59,7 +59,7 @@
                     </div>
                     <br>
                     <div class="form-group">
-                        <h6>Fecha de nacimiento: {{curso.docente.fecha_nacimiento}}</h5>
+                        <h6>Fecha de nacimiento: {{curso.docente.fecha_nacimiento}}</h6>
                         <input type="date" id="txtFECH" name="txtFECH" class="form-control" min="1920-01-01" max="2004-01-01" required/>
                     </div>
                     <br>
@@ -70,11 +70,15 @@
                         -->
                         <select type="text" id="txtGEN" name="txtGEN" class="form-control" autofocus required>
                             <option>{{curso.docente.genero}}</option>
-                            {% for d in docente %}
-                            {% if curso.docente.genero != d.genero %}
-                            <option>{{d.genero}}</option>
+                            {% if curso.docente.genero != 'Masculino' %}
+                                <option>Masculino</option>
                             {% endif %}
-                            {% endfor %}
+                            {% if curso.docente.genero != 'Femenino' %}
+                                <option>Femenino</option>
+                            {% endif %}
+                            {% if curso.docente.genero != 'Otro' %}
+                                <option>Otro</option>
+                            {% endif %}
                         </select>
                     </div>
                     <br>

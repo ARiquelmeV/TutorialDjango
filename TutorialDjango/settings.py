@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 import os
+import claves
 
 from pathlib import Path
 
@@ -23,13 +24,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'selvacorpi'
+SECRET_KEY = claves.API_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['*']
-
+ALLOWED_HOSTS = claves.Hosts
 
 # Application definition
 
@@ -85,14 +85,15 @@ WSGI_APPLICATION = 'TutorialDjango.wsgi.application'
 #    }
 #}
 
+# Deployed Database in heroku
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'HOST': 'ec2-54-157-16-196.compute-1.amazonaws.com',
-        'NAME': 'dkbbe1pnsm8sa',
-        'USER': 'ddxdhwovkblyck',
+        'HOST':  claves.DB_HOST,
+        'NAME':  claves.DB_NAME,
+        'USER':  claves.DB_USER,
         'PORT': '5432',
-        'PASSWORD': 'adb188532794c3b8bd67b54cd6d303442acef08e4349423295c7d136c1448558',
+        'PASSWORD': claves.DB_PASS,
     }
 }
 
@@ -133,7 +134,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-#Deploy
+# Zona de Deploy # 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_TMP = os.path.join(BASE_DIR, 'static')
 
@@ -145,6 +146,11 @@ STATICFILES_DIRS = (
 )
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+import django_heroku
+django_heroku.settings(locals())
+
+# Fin de la Zona de Deploy #
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field

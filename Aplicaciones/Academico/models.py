@@ -1,7 +1,6 @@
 from random import choices
 from django.db import models
 from django.utils.html import format_html
-from .choices import generos
 
 # Create your models here.
 
@@ -11,7 +10,7 @@ class Docente(models.Model):
     apellido_materno = models.CharField(max_length=20, verbose_name='Apellido Materno')
     nombres = models.CharField(max_length=20, verbose_name='Nombres')
     fecha_nacimiento = models.DateField(verbose_name='Fecha de Naciminto')
-    genero = models.CharField(max_length=1, choices=generos, default='F')
+    genero = models.CharField(max_length=10, verbose_name='Género', default='Otro')
 
     # Para mostrar el nombre completo en el panel
     def nombre_completo(self):
