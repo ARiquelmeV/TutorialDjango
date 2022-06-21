@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 import os
-import claves
+from Secreto import claves 
 
 from pathlib import Path
 
